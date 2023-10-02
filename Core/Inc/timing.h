@@ -21,25 +21,16 @@ PUTCHAR_PROTOTYPE {
 }
 
 #define HTIM htim16
-#define TIME_MEASURE(func)                                \
+#define TIME_MEASURE_US(func)                                \
 {                                                         \
     HAL_TIM_Base_Start(&HTIM);                            \
     uint16_t timer_val = __HAL_TIM_GET_COUNTER(&HTIM);    \
     func;                                                 \
     timer_val = __HAL_TIM_GET_COUNTER(&HTIM) - timer_val; \
     	HAL_TIM_Base_Stop(&HTIM);                         \
-    printf(#func ": %d us\r\n", timer_val);               \
+    printf(#func ": %ld us\r\n", (timer_val*100));               \
 }
 
-#define CYCLE_MEASURE(func)                               \
-{                                                         \
-    HAL_TIM_Base_Start(&HTIM);                            \
-    uint16_t timer_val = __HAL_TIM_GET_COUNTER(&HTIM);    \
-    func;                                                 \
-    timer_val = __HAL_TIM_GET_COUNTER(&HTIM) - timer_val; \
-    HAL_TIM_Base_Stop(&HTIM);                             \
-   printf(#func ": %lu\r\n", (uint32_t) (timer_val * (HAL_RCC_GetHCLKFreq() /1000000.0))); \
-}
 
 
 #endif /* INC_TIMING_H_ */
