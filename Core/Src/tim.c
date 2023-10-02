@@ -4,8 +4,7 @@ TIM_HandleTypeDef htim16;
 
 void MX_TIM16_Init(void) {
 	htim16.Instance = TIM16;
-	htim16.Init.Prescaler = (HAL_RCC_GetHCLKFreq() / 1000000) - 1;
-	//htim16.Init.Prescaler = (HAL_RCC_GetHCLKFreq() / 1000) -1 ; // 100us pr tick
+	htim16.Init.Prescaler = (4800-1); // 10Khz 100 us pr tick	
 	htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim16.Init.Period = 65535;
 	htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
